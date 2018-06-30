@@ -1,0 +1,219 @@
+var _user$project$Views$notFoundView = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('not dound detail ok'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Views$playerEditPage = F2(
+	function (model, movieslug) {
+		var _p0 = model.posts;
+		switch (_p0.ctor) {
+			case 'NotAsked':
+				return _elm_lang$html$Html$text('');
+			case 'Loading':
+				return _elm_lang$html$Html$text('Loading ...');
+			case 'Success':
+				var maybeMovie = _elm_lang$core$List$head(
+					A2(
+						_elm_lang$core$List$filter,
+						function (movie) {
+							return _elm_lang$core$Native_Utils.eq(movie.slug, movieslug);
+						},
+						_p0._0));
+				var _p1 = maybeMovie;
+				if (_p1.ctor === 'Just') {
+					return _user$project$Pages_Detail$detailview(_p1._0);
+				} else {
+					return _user$project$Views$notFoundView;
+				}
+			default:
+				return _elm_lang$html$Html$text(
+					_elm_lang$core$Basics$toString(_p0._0));
+		}
+	});
+var _user$project$Views$page = function (model) {
+	var _p2 = model.route;
+	switch (_p2.ctor) {
+		case 'MoviesRoute':
+			return _user$project$Pages_Listmovies$mylistview(model);
+		case 'MovieRoute':
+			return A2(_user$project$Views$playerEditPage, model, _p2._0);
+		default:
+			return _user$project$Views$notFoundView;
+	}
+};
+var _user$project$Views$view = function (model) {
+	return A3(
+		_debois$elm_mdl$Material_Scheme$topWithScheme,
+		_debois$elm_mdl$Material_Color$Teal,
+		_debois$elm_mdl$Material_Color$LightGreen,
+		A4(
+			_debois$elm_mdl$Material_Layout$render,
+			_user$project$Msgs$Mdl,
+			model.mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Layout$fixedHeader,
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Layout$onSelectTab(_user$project$Msgs$SelectTab),
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Layout$selectedTab(model.selectedTab),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				header: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h1,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'padding', _1: '2rem'},
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('My Movie'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				drawer: {ctor: '[]'},
+				tabs: {
+					ctor: '_Tuple2',
+					_0: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('List Movies'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Session'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Session'),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Color$background(
+							A2(_debois$elm_mdl$Material_Color$color, _debois$elm_mdl$Material_Color$Green, _debois$elm_mdl$Material_Color$S400)),
+						_1: {ctor: '[]'}
+					}
+				},
+				main: {
+					ctor: '::',
+					_0: _user$project$Views$page(model),
+					_1: {ctor: '[]'}
+				}
+			}));
+};
+var _user$project$Views$subview = function (model) {
+	return A6(
+		_debois$elm_mdl$Material_Tabs$render,
+		_user$project$Msgs$Mdl,
+		{
+			ctor: '::',
+			_0: 0,
+			_1: {ctor: '[]'}
+		},
+		model.mdl,
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Tabs$ripple,
+			_1: {
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Tabs$onSelectTab(_user$project$Msgs$SelectTab),
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Tabs$activeTab(model.selectedTab),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_debois$elm_mdl$Material_Tabs$label,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$center,
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Icon$i('info_outline'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Options$span,
+							{
+								ctor: '::',
+								_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '4px'),
+								_1: {ctor: '[]'}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('About tabs'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_Tabs$label,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Options$center,
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Icon$i('code'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_debois$elm_mdl$Material_Options$span,
+								{
+									ctor: '::',
+									_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '4px'),
+									_1: {ctor: '[]'}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Example'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Views$tabviews = function (model) {
+	var _p3 = model.selectedTab;
+	switch (_p3) {
+		case 0:
+			return _user$project$Pages_Listmovies$mylistview(model);
+		case 1:
+			return _elm_lang$html$Html$text('something else');
+		case 2:
+			return _elm_lang$html$Html$text('something else2222');
+		default:
+			return _elm_lang$html$Html$text('404');
+	}
+};

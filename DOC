@@ -1,0 +1,8 @@
+yarn add webpack webpack-dev-server elm-webpack-loader file-loader style-loader css-loader url-loader
+yarn add ace-css@1.1 font-awesome@4
+
+yarn add install webpack -D  
+yarn add install webpack-dev-server -D
+yarn add install elm-webpack-loader -D
+yarn add webpack-cli -D
+./node_modules/.bin/webpack-dev-server

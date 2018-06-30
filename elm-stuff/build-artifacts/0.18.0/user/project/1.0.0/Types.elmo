@@ -1,0 +1,16 @@
+var _user$project$Types$Model = F5(
+	function (a, b, c, d, e) {
+		return {name: a, mdl: b, selectedTab: c, posts: d, route: e};
+	});
+var _user$project$Types$Movie = F4(
+	function (a, b, c, d) {
+		return {title: a, slug: b, des: c, pk: d};
+	});
+var _user$project$Types$NotFoundRoute = {ctor: 'NotFoundRoute'};
+var _user$project$Types$MovieRoute = function (a) {
+	return {ctor: 'MovieRoute', _0: a};
+};
+var _user$project$Types$MoviesRoute = {ctor: 'MoviesRoute'};
+var _user$project$Types$initialModel = function (route) {
+	return {name: 'Hello', mdl: _debois$elm_mdl$Material$model, selectedTab: 0, posts: _krisajenkins$remotedata$RemoteData$Loading, route: _user$project$Types$MoviesRoute};
+};
