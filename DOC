@@ -1,4 +1,4 @@
-yarn add webpack webpack-dev-server elm-webpack-loader file-loader style-loader css-loader url-loader
+yarn add webpack webpack-dev-server elm-webpack-loader file-loader style-loader css-loader url-loader webpack-cli ace-css@1.1 font-awesome@4 -D 
 yarn add ace-css@1.1 font-awesome@4
 
 yarn add install webpack -D  
@@ -6,3 +6,9 @@ yarn add install webpack-dev-server -D
 yarn add install elm-webpack-loader -D
 yarn add webpack-cli -D
 ./node_modules/.bin/webpack-dev-server --history-api-fallback
+npm install
+npm audit fix
+
+
+npm install webpack --save-dev
+npm install elm-webpack-loader --save-dev

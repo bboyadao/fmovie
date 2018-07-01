@@ -28,9 +28,6 @@ parseLocation location =
         Nothing ->
             NotFoundRoute
 
-
 -- playersPath : String
 -- playersPath =
 --     "#players"
-
-
