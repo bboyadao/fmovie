@@ -1,34 +1,36 @@
 module Routing exposing (..)
 
 import Navigation exposing (Location)
-import Types exposing (MovieID, Route(..))
+import Types exposing ( Route(..))
 import UrlParser exposing (..)
 
 
+about:String
+about= "about"
 
-matchers : Parser (Route -> a) a
+listmovie_link:String
+listmovie_link= "movies"
+
+matchers : UrlParser.Parser (Route -> a) a
 matchers =
-    oneOf
-        [ map MoviesRoute top
-        , map MovieRoute (s "players" </> string)
-        , map MoviesRoute (s "players")
+    UrlParser.oneOf
+        [ map MoviesRoute UrlParser.top
+        , map DetailMovie (UrlParser.s "watch" </> string)
+        , map MoviesRoute (UrlParser.s "movies")
+        , map AboutRoute (UrlParser.s "about")
         ]
 
 parseLocation : Location  -> Route
 parseLocation location =
     case (UrlParser.parsePath matchers location) of
         Just route ->
-            route
-
+            route 
         Nothing ->
             NotFoundRoute
 
 
 -- playersPath : String
 -- playersPath =
---     "#/"
+--     "#players"
 
 
--- playerPath : MovieID -> String
--- playerPath slug =
---     "#/watch/" ++ slug

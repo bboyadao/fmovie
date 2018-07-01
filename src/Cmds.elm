@@ -14,7 +14,7 @@ import Msgs exposing (Msg)
 
 listMoviesUrl : String
 listMoviesUrl =
-    "http://localhost:8000/api/movie/?format=json&q="
+    "http://127.0.0.1:8000/api/movie/?format=json&q="
 
 cmdListMovies:  Cmd Msg
 cmdListMovies  =

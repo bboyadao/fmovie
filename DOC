@@ -5,4 +5,4 @@ yarn add install webpack -D
 yarn add install webpack-dev-server -D
 yarn add install elm-webpack-loader -D
 yarn add webpack-cli -D
-./node_modules/.bin/webpack-dev-server
+./node_modules/.bin/webpack-dev-server --history-api-fallback

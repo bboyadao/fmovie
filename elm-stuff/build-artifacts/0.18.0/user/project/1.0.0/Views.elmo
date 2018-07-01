@@ -1,3 +1,18 @@
+var _user$project$Views$aboutView = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h1,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('ABOUT PAGE'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
 var _user$project$Views$notFoundView = A2(
 	_elm_lang$html$Html$div,
 	{ctor: '[]'},
@@ -11,9 +26,9 @@ var _user$project$Views$playerEditPage = F2(
 		var _p0 = model.posts;
 		switch (_p0.ctor) {
 			case 'NotAsked':
-				return _elm_lang$html$Html$text('');
+				return _elm_lang$html$Html$text('Not Ask');
 			case 'Loading':
-				return _elm_lang$html$Html$text('Loading ...');
+				return _elm_lang$html$Html$text('Feaching data ...');
 			case 'Success':
 				var maybeMovie = _elm_lang$core$List$head(
 					A2(
@@ -33,17 +48,105 @@ var _user$project$Views$playerEditPage = F2(
 					_elm_lang$core$Basics$toString(_p0._0));
 		}
 	});
+var _user$project$Views$findPostById = F2(
+	function (slug, movies) {
+		var _p2 = _krisajenkins$remotedata$RemoteData$toMaybe(movies);
+		if (_p2.ctor === 'Just') {
+			return _elm_lang$core$List$head(
+				A2(
+					_elm_lang$core$List$filter,
+					function (post) {
+						return _elm_lang$core$Native_Utils.eq(post.slug, slug);
+					},
+					_p2._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
 var _user$project$Views$page = function (model) {
-	var _p2 = model.route;
-	switch (_p2.ctor) {
+	var _p3 = model.route;
+	switch (_p3.ctor) {
+		case 'NotFoundRoute':
+			return _user$project$Views$notFoundView;
+		case 'AboutRoute':
+			return _user$project$Views$aboutView;
 		case 'MoviesRoute':
 			return _user$project$Pages_Listmovies$mylistview(model);
-		case 'MovieRoute':
-			return A2(_user$project$Views$playerEditPage, model, _p2._0);
 		default:
-			return _user$project$Views$notFoundView;
+			var _p4 = A2(_user$project$Views$findPostById, _p3._0, model.posts);
+			if (_p4.ctor === 'Just') {
+				return _user$project$Pages_Detail$detailview(_p4._0);
+			} else {
+				return _user$project$Views$notFoundView;
+			}
 	}
 };
+var _user$project$Views$nav = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$href(_user$project$Routing$listmovie_link),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('List '),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$li,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$a,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Actions '),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href(_user$project$Routing$about),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('About '),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
 var _user$project$Views$view = function (model) {
 	return A3(
 		_debois$elm_mdl$Material_Scheme$topWithScheme,
@@ -88,7 +191,11 @@ var _user$project$Views$view = function (model) {
 						}),
 					_1: {ctor: '[]'}
 				},
-				drawer: {ctor: '[]'},
+				drawer: {
+					ctor: '::',
+					_0: _user$project$Views$nav,
+					_1: {ctor: '[]'}
+				},
 				tabs: {
 					ctor: '_Tuple2',
 					_0: {
@@ -117,103 +224,4 @@ var _user$project$Views$view = function (model) {
 					_1: {ctor: '[]'}
 				}
 			}));
-};
-var _user$project$Views$subview = function (model) {
-	return A6(
-		_debois$elm_mdl$Material_Tabs$render,
-		_user$project$Msgs$Mdl,
-		{
-			ctor: '::',
-			_0: 0,
-			_1: {ctor: '[]'}
-		},
-		model.mdl,
-		{
-			ctor: '::',
-			_0: _debois$elm_mdl$Material_Tabs$ripple,
-			_1: {
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Tabs$onSelectTab(_user$project$Msgs$SelectTab),
-				_1: {
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Tabs$activeTab(model.selectedTab),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_debois$elm_mdl$Material_Tabs$label,
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Options$center,
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Icon$i('info_outline'),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_debois$elm_mdl$Material_Options$span,
-							{
-								ctor: '::',
-								_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '4px'),
-								_1: {ctor: '[]'}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('About tabs'),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_debois$elm_mdl$Material_Tabs$label,
-					{
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Options$center,
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Icon$i('code'),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_debois$elm_mdl$Material_Options$span,
-								{
-									ctor: '::',
-									_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '4px'),
-									_1: {ctor: '[]'}
-								},
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Example'),
-								_1: {ctor: '[]'}
-							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		},
-		{ctor: '[]'});
-};
-var _user$project$Views$tabviews = function (model) {
-	var _p3 = model.selectedTab;
-	switch (_p3) {
-		case 0:
-			return _user$project$Pages_Listmovies$mylistview(model);
-		case 1:
-			return _elm_lang$html$Html$text('something else');
-		case 2:
-			return _elm_lang$html$Html$text('something else2222');
-		default:
-			return _elm_lang$html$Html$text('404');
-	}
 };

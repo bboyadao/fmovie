@@ -16,7 +16,7 @@ var _user$project$Cmds$playerDecoder = A3(
 				_elm_lang$core$Json_Decode$string,
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Types$Movie)))));
 var _user$project$Cmds$parsepost = _elm_lang$core$Json_Decode$list(_user$project$Cmds$playerDecoder);
-var _user$project$Cmds$listMoviesUrl = 'http://localhost:8000/api/movie/?format=json&q=';
+var _user$project$Cmds$listMoviesUrl = 'http://127.0.0.1:8000/api/movie/?format=json&q=';
 var _user$project$Cmds$cmdListMovies = A2(
 	_elm_lang$core$Platform_Cmd$map,
 	_user$project$Msgs$Getdata,

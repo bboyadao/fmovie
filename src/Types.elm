@@ -1,4 +1,4 @@
-module Types exposing (Model,Movie,Route(..),MovieID,Mdl,initialModel)
+module Types exposing (Model,Movie,Route(..),Mdl,initialModel,Movie_Slug)
 import RemoteData exposing (WebData)
 
 import Material exposing (..)
@@ -17,19 +17,23 @@ type alias Model=
 
 type alias Movie =
     { title : String
-    , slug : String
+    , slug : Movie_Slug
     , des: String
     , pk: Int
     --  ,actors: List Actor
     }
 
 
-type alias MovieID = String
+type alias Movie_Slug =
+    String
+
+
 
 type Route
     = MoviesRoute
-    | MovieRoute MovieID
+    | DetailMovie String
     | NotFoundRoute
+    | AboutRoute
 
 
 
@@ -40,16 +44,5 @@ initialModel route=
         , mdl= Material.model 
         , selectedTab = 0
         , posts = RemoteData.Loading
-        , route =MoviesRoute
+        , route = route
     })
-
--- initialModel : Model
--- initialModel =
---     ({ 
---         name="Hello"
---         , mdl= Material.model 
---         , selectedTab = 0
---         , posts = RemoteData.Loading
---         , route =MoviesRoute
---     })
-

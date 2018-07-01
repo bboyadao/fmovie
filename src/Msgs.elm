@@ -1,6 +1,5 @@
 module Msgs exposing (..)
 import Material exposing (..) 
-import Http
 import Types exposing (Movie)
 import Navigation exposing (Location)
 import RemoteData exposing (WebData)

@@ -6,14 +6,14 @@ import Html.Attributes exposing (href, class, style)
 import RemoteData
 import Navigation exposing (Location)
 import RemoteData exposing (WebData)
-
+import CustomHtmlEvents exposing (onLinkClick)
 import Updates exposing (update)
 import Subs exposing (subscriptions)
 import Msgs exposing (Msg)
 import Cmds exposing (cmdListMovies)
 import Routing exposing (parseLocation) 
---playerPath
-import Types exposing (Model,Route(..),Movie)
+
+import Types exposing (Model,Route(..),Movie,Movie_Slug)
 -- import CustomHtmlEvents exposing (onLinkClick)
 
 
@@ -125,24 +125,27 @@ movieViews players =
 
 
 playerRow : Movie -> Html Msg
-playerRow model =
-   
+playerRow player =
     tr []
-        [
-              td [] [ text (toString model.pk) ]
-             ,td [] [ a[href model.slug
-                    -- , onLinkClick (Msgs.ChangeLocation path) 
-                        ] [ text model.title ]]
-             
-            , td [] [ text model.des ]
-            , td [] [ text (toString model.slug )
-            
-            ]
-        
+        [ td [] [ text player.title ]
+        , td [] [ text player.des ]
+        , td [] [ text (toString player.slug) ]
         , td []
-            []
+            [ editBtn player ]
         ]
 
+
+editBtn : Movie -> Html Msg
+editBtn movie =
+    let
+        path =
+            "/watch/" ++ movie.slug
+    in
+        a
+            [ class "btn regular"
+            , href path
+            ]
+            [ i [ class "fa fa-pencil mr1" ] [], text "Edit" ]
 
 
 -- editBtn : Movie -> Html.Html Msg

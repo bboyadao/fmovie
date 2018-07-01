@@ -6,18 +6,25 @@ var _user$project$Routing$matchers = _evancz$url_parser$UrlParser$oneOf(
 			ctor: '::',
 			_0: A2(
 				_evancz$url_parser$UrlParser$map,
-				_user$project$Types$MovieRoute,
+				_user$project$Types$DetailMovie,
 				A2(
 					_evancz$url_parser$UrlParser_ops['</>'],
-					_evancz$url_parser$UrlParser$s('players'),
+					_evancz$url_parser$UrlParser$s('watch'),
 					_evancz$url_parser$UrlParser$string)),
 			_1: {
 				ctor: '::',
 				_0: A2(
 					_evancz$url_parser$UrlParser$map,
 					_user$project$Types$MoviesRoute,
-					_evancz$url_parser$UrlParser$s('players')),
-				_1: {ctor: '[]'}
+					_evancz$url_parser$UrlParser$s('movies')),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_evancz$url_parser$UrlParser$map,
+						_user$project$Types$AboutRoute,
+						_evancz$url_parser$UrlParser$s('about')),
+					_1: {ctor: '[]'}
+				}
 			}
 		}
 	});
@@ -29,3 +36,5 @@ var _user$project$Routing$parseLocation = function (location) {
 		return _user$project$Types$NotFoundRoute;
 	}
 };
+var _user$project$Routing$listmovie_link = 'movies';
+var _user$project$Routing$about = 'about';

@@ -4,7 +4,7 @@ var _user$project$Pages_Detail$detailview = function (model) {
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('Detail page'),
+			_0: _elm_lang$html$Html$text(model.title),
 			_1: {ctor: '[]'}
 		});
 };

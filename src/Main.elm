@@ -9,19 +9,6 @@ import Views exposing (view)
 
 import Navigation exposing (Location)
 import Routing exposing (..)
--- init : ( Model, Cmd Msg )
--- init =
---     (
---         {name="Hello"
---         ,mdl= Material.model 
---         ,selectedTab = 0
---         ,posts=[]        
---         }
---         ,Cmd.none
-                    
---             )
-
-
 
 
 init :Location ->  ( Model, Cmd Msg )

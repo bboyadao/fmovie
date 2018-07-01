@@ -14,10 +14,6 @@
     "font-awesome": "4",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1"
-  },
-  "scripts": {
-    "api": "node api.js",
-    "build": "webpack",
-    "client": "webpack-dev-server --port 3000"
   }
+
 }

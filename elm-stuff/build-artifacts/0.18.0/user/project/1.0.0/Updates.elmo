@@ -22,12 +22,13 @@ var _user$project$Updates$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
-				var newRoute = _user$project$Routing$parseLocation(_p0._0);
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{route: newRoute}),
+						{
+							route: _user$project$Routing$parseLocation(_p0._0)
+						}),
 					{ctor: '[]'});
 		}
 	});

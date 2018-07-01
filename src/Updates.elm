@@ -7,7 +7,7 @@ import Types exposing (Model,Movie)
 import Material
 import Msgs exposing (Msg)
 import Routing exposing (parseLocation)
-
+import Cmds exposing (cmdListMovies)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -21,31 +21,14 @@ update msg model =
             { model | selectedTab = num } ! []
 
         Msgs.Getdata response ->
-        ( { model | posts = response }, Cmd.none )    
+        ( { model | posts = response }, Cmd.none )  --parse data  
 
         
         Msgs.UrlChange location ->
-            let
+            -- let
               
-                newRoute =
-                    parseLocation location
+            --     newRoute =
+            --         parseLocation location
 
-            in
-              { model | route = newRoute } ! []
-
-        
-        
-        {-- Msgs.Getdata (Ok json) ->
-        --     ({model | posts = json}![])
-        -- Msgs.Getdata (Err e) ->
-        --     (Debug.log (toString e)model![])
-        
-        
-        -- Msgs.OnLocationChange location ->
-        --     let
-        --         newRoute =
-        --             parseLocation location
-        --     in
-        --         ( { model | route = newRoute }, Cmd.none ) --}
-
-
+            -- in
+              { model | route = Routing.parseLocation location } ! []

@@ -1,11 +1,11 @@
 module Views exposing (view)
 import Html exposing (..)
-import Html exposing (div)
-import Types exposing (Model,Mdl,Movie,MovieID,Route(..))
+import Html exposing (Html,div)
+import Types exposing (Model,Mdl,Movie,Movie_Slug,Route(..))
 import Msgs exposing (Msg)
 import Html.Attributes exposing (href, class, style)
 import RemoteData exposing (WebData)
-
+import Routing exposing (about,listmovie_link)
 import Pages.Listmovies exposing (mylistview)
 import Pages.Detail exposing (detailview)
 
@@ -21,67 +21,15 @@ import Material.Color as Color
 import Material.Layout as Layout
 import Material.Tabs as Tabs
 
-tabviews: Model -> Html Msg
-tabviews model = 
-    case model.selectedTab of
-        0 ->
-            mylistview model
 
-        1 ->
-            text "something else"
-        2-> text "something else2222"
-        _ ->
-            text "404"
-
-
-
-
--- movieViews: List Movie -> Html Msg
--- movieViews posts =
---     li [] [
-
---         p [ ][text posts.title
-
---         , span [][ text "-->"]
-
---         ]
---         , p[] [text posts.des]
-        -- ,List.map actorsView post.actors |> ul []
-    -- ]
-
--- actorsView: String -> Html Msg
--- actorsView actor =
-    
---     li [] [text  (toString actor)]
-
-
-
-
-
-subview : Model -> Html Msg
-subview model =    
-        
-    Tabs.render Msgs.Mdl [0] model.mdl
-    [ Tabs.ripple
-    , Tabs.onSelectTab Msgs.SelectTab
-    , Tabs.activeTab model.selectedTab
+nav:  Html Msg
+nav  =
+    Html.div [] [
+            li[] [a [href listmovie_link] [text "List "]]
+            ,li[] [a [] [text "Actions "]]
+            ,li[] [a [href about] [text "About "]]
     ]
-    [ Tabs.label
-    [ Options.center ]
-    [ Icon.i "info_outline"
-    , Options.span [ css "width" "4px" ] []
-    , text "About tabs"
-    ]
-    , Tabs.label
-    [ Options.center ]
-    [ Icon.i "code"
-    , Options.span [ css "width" "4px" ] []
-    , text "Example"
-    ]
-    ]   []
-        
 
- 
 
 view : Model  -> Html Msg
 view model =
@@ -90,54 +38,74 @@ view model =
         [ Layout.fixedHeader
         , Layout.onSelectTab Msgs.SelectTab
         , Layout.selectedTab model.selectedTab
-
-        ]
-        { header = [ h1 [ style [ ( "padding", "2rem" ) ] ] [ text "My Movie" ] ]
-        , drawer = []
+         
         
-        , tabs = ( [ 
-            text "List Movies" , text "Session" , text "Session" ]
-            ,  [ Color.background (Color.color Color.Green Color.S400) 
-            ])
-
+        ]
+        { header = 
+        [ h1 [ style [ ( "padding", "2rem" ) ] ] [ text "My Movie" ] ]
+        , drawer = [ 
+                nav
+            ]
+        
+        , tabs = ( 
+            [ 
+                text "List Movies" , text "Session" , text "Session" 
+            ]
+            ,[ 
+                Color.background (Color.color Color.Green Color.S400) 
+                
+            ]
+            )
+        
         , main = [ page  model ]
-        }|> Material.Scheme.topWithScheme Color.Teal Color.LightGreen
+        }
+        |> Material.Scheme.topWithScheme Color.Teal Color.LightGreen
 
--- view : Model  -> Html Msg
--- view model =
---     Html.div [] [
---         page model
---     ]
-
-
----------------- LIST VIEWS----------------
-
-
-
--------------------DETAIL-----------------
 
 
 page : Model -> Html Msg
 page model =
     case model.route of
-        Types.MoviesRoute ->
-           mylistview model
-
-        Types.MovieRoute slug ->
-            playerEditPage model slug
 
         Types.NotFoundRoute ->
             notFoundView
+        Types.AboutRoute -> 
+            aboutView
+
+        Types.MoviesRoute ->
+           mylistview model
+
+        Types.DetailMovie slug ->
+            case findPostById slug model.posts of
+                Just post ->
+                    detailview post
+                Nothing -> 
+                    notFoundView
+                
+            -- playerEditPage  model  slug
 
 
-playerEditPage : Model -> Types.MovieID -> Html Msg
+            
+
+findPostById : String -> WebData (List Movie) -> Maybe Movie
+findPostById slug movies =
+    case RemoteData.toMaybe movies of
+        Just movie ->
+            movie
+                |> List.filter (\post -> post.slug == slug)
+                |> List.head
+
+        Nothing ->
+            Nothing                
+
+playerEditPage : Model -> Movie_Slug -> Html Msg
 playerEditPage model movieslug =
     case model.posts of
         RemoteData.NotAsked ->
-            text ""
+            text "Not Ask"
 
         RemoteData.Loading ->
-            text "Loading ..."
+            text "Feaching data ..."
 
         RemoteData.Success movies ->
             let
@@ -163,3 +131,10 @@ notFoundView =
     Html.div []
         [ text "not dound detail ok"
         ]
+aboutView: Html Msg
+aboutView = 
+    Html.div []
+        [ h1 [] [ text "ABOUT PAGE"]
+        ]
+
+
