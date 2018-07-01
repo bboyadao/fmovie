@@ -1,8 +1,0 @@
-var _user$project$CustomHtmlEvents$onLinkClick = function (message) {
-	var options = {stopPropagation: false, preventDefault: true};
-	return A3(
-		_elm_lang$html$Html_Events$onWithOptions,
-		'click',
-		options,
-		_elm_lang$core$Json_Decode$succeed(message));
-};
