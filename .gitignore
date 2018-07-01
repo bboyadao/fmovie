@@ -1,4 +1,4 @@
 elm-stuff/
-
+package-lock.json
 node_modules/
 *.html
